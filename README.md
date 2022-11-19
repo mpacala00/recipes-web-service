@@ -3,7 +3,7 @@
 ## Running
 
     cd recipes-web-service
-    mvn spring-boot:run
+    ./gradlew bootRun
 
     cd recipes-ws-ng
     npm install
