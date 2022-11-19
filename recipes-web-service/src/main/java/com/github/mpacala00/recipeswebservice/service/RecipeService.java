@@ -18,4 +18,6 @@ public interface RecipeService {
 
     Optional<Recipe> findById(String id);
 
+    void deleteById(String id);
+
 }

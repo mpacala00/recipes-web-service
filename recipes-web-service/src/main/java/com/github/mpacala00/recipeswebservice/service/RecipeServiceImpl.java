@@ -37,4 +37,9 @@ public class RecipeServiceImpl implements RecipeService {
     @Override public Optional<Recipe> findById(String id) {
         return recipeRepository.findById(id);
     }
+
+    @Override
+    public void deleteById(String id) {
+        recipeRepository.deleteById(id);
+    }
 }
