@@ -3,6 +3,7 @@ package com.github.mpacala00.recipeswebservice.controller;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,7 +44,13 @@ public class RecipeController {
 
     @GetMapping("/recipes/{id}")
     public ResponseEntity<Recipe> findRecipeById(@PathVariable String id) {
-        return ResponseEntity.ok(recipeService.findById(id).orElse(null));
+        Optional<Recipe> recipeOpt = recipeService.findById(id);
+
+        if (recipeOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(recipeOpt.get());
     }
 
     @DeleteMapping("/recipes/{id}")
