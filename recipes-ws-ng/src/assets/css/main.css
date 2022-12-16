@@ -1,0 +1,26 @@
+#body {
+   margin: 0;
+   padding: 0;
+   background-color: aliceblue;
+}
+
+#main {
+   margin: 50px;
+   height: 100%;
+}
+
+.side-col, .main-col {
+   height: 100%;
+}
+
+.main-row {
+   height: 87vh;
+}
+
+.card-link {
+   margin-left: 0 !important;
+}
+
+.card-img-top {
+   max-height: 8em;
+}
