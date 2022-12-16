@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,5 +23,10 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public List<Ingredient> findAll() {
         return ingredientRepository.findAll();
+    }
+
+    @Override
+    public Optional<Ingredient> findByName(String name) {
+        return ingredientRepository.findByName(name);
     }
 }
