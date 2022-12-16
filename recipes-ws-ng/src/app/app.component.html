@@ -1,8 +1,11 @@
-<div class="row justify-content-center" id="main">
-  <div class="col-8">
-    <div class="card">
+<div class="container justify-content-center" id="main">
+  <div class="row">
+    <div class="card col-3 mr-2">
       <app-nav-panel></app-nav-panel>
+    </div>  
+
+    <div class="col-8 card">
+      <router-outlet></router-outlet>
     </div>
-    
   </div>
 </div>
