@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Data
 @AllArgsConstructor
+@Builder
 @Document("recipes")
 public class Recipe {
 
@@ -22,7 +24,6 @@ public class Recipe {
 
     private String name;
     private String category;
-    @DocumentReference
     private List<Ingredient> ingredients;
 
     public Recipe() {
