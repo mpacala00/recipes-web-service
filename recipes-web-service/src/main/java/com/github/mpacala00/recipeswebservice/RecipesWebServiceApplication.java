@@ -18,8 +18,6 @@ import com.github.mpacala00.recipeswebservice.service.RecipeService;
 public class RecipesWebServiceApplication implements CommandLineRunner {
 
 	@Autowired RecipeService recipeService;
-	@Autowired
-	IngredientService ingredientService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(RecipesWebServiceApplication.class, args);
@@ -47,7 +45,5 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 						ing1, ing2, ing3
 				)).build()
 		);
-
-		ingredientService.save(Ingredient.builder().name("garlic").build());
 	}
 }
