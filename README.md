@@ -1,4 +1,5 @@
 # Recipes Web Service
+requires MongoDB
 
 ## Running
 
