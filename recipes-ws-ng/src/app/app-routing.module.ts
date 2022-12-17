@@ -13,11 +13,6 @@ const routes: Routes = [
     component: HomePageComponent,
     pathMatch: 'full',
   },
-  {
-    path: 'browse-recipes',
-    component: BrowseRecipesPageComponent,
-    pathMatch: 'full',
-  },
 ];
 
 @NgModule({
