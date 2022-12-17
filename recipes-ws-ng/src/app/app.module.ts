@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavPanelComponent } from './components/nav-panel/nav-panel.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
