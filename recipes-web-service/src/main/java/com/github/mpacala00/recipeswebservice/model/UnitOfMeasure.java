@@ -5,17 +5,12 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-@Document("ingredients")
+@Document("unitsOfMeasure")
 @Data
 @Builder
-public class Ingredient {
+public class UnitOfMeasure {
 
     @Id
     private String id;
-    private String name;
-    private Double quantity;
-
-    private UnitOfMeasure unit;
-
+    private String unit;
 }
