@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavPanelComponent } from './components/nav-panel/nav-panel.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { RecipeCardComponent } from './components/home-page/recipe-card/recipe-card.component';
+import { BrowseRecipesPageComponent } from './components/browse-recipes-page/browse-recipes-page.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { RecipeCardComponent } from './components/home-page/recipe-card/recipe-c
     NavPanelComponent,
     HomePageComponent,
     RecipeCardComponent,
+    BrowseRecipesPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
