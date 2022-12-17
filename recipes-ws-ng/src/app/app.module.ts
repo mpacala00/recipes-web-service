@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavPanelComponent } from './components/nav-panel/nav-panel.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -16,7 +17,7 @@ import { BrowseRecipesPageComponent } from './components/browse-recipes-page/bro
     RecipeCardComponent,
     BrowseRecipesPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
