@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface UnitOfMeasureRepository extends MongoRepository<UnitOfMeasure, String>{
 
     @Query("{name:'?0'}")
-    Optional<UnitOfMeasure> findByName(String name);
+    Optional<UnitOfMeasure> findByUnit(String unit);
 }

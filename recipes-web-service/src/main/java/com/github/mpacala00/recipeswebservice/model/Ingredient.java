@@ -1,6 +1,5 @@
 package com.github.mpacala00.recipeswebservice.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -16,4 +15,7 @@ public class Ingredient {
     private String id;
     private String name;
     private Double quantity;
+
+    private UnitOfMeasure unit;
+
 }

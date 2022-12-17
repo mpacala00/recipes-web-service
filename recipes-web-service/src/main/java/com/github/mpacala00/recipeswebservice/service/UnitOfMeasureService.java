@@ -10,5 +10,5 @@ public interface UnitOfMeasureService {
 
     List<UnitOfMeasure> findAll();
 
-    Optional<UnitOfMeasure> findByName(String name);
+    Optional<UnitOfMeasure> findByUnit(String unit);
 }
