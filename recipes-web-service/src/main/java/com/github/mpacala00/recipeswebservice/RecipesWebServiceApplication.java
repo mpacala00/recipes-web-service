@@ -37,7 +37,8 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 	}
 
 	private void saveExampleRecipes() {
-		Ingredient ing1 = Ingredient.builder().name("Pasta").quantity(400.0).build();
+		UnitOfMeasure uom1 = UnitOfMeasure.builder().unit("grams").build();
+		Ingredient ing1 = Ingredient.builder().name("Pasta").quantity(400.0).unitOfMeasure(uom1).build();
 		Ingredient ing2 = Ingredient.builder().name("Tomato sauce").quantity(500.0).build();
 		Ingredient ing3 = Ingredient.builder().name("Ground beef").quantity(500.0).build();
 
@@ -49,6 +50,5 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 				)).build()
 		);
 
-		unitOfMeasureService.save(UnitOfMeasure.builder().unit("g").build());
 	}
 }
