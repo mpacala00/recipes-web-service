@@ -1,4 +1,5 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
+import { Recipe } from 'src/app/model/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class HomePageComponent implements OnInit {
 
   constructor(private recipeService: RecipeService) { }
 
-  recipes = [];
+  recipes: Recipe[] = [];
 
   ngOnInit(): void {
     this.recipeService.getAllRecipes().subscribe({

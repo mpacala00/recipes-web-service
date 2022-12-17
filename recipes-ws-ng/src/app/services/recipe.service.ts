@@ -12,6 +12,6 @@ export class RecipeService {
   private recipesUrl = `${environment.baseUrl}/recipes`;
 
   getAllRecipes() {
-    return this.http.get<Recipe>(this.recipesUrl);
+    return this.http.get<Recipe[]>(this.recipesUrl);
   }
 }

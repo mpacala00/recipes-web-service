@@ -4,5 +4,5 @@ export interface Ingredient {
     id: string;
     name: string;
     quantity: number;
-    unit: UnitOfMeasure; 
+    unitOfMeasure: UnitOfMeasure; 
 }
