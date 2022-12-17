@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
+
 @Document("ingredients")
 @Data
 @Builder
@@ -16,6 +17,6 @@ public class Ingredient {
     private String name;
     private Double quantity;
 
-    private UnitOfMeasure unit;
+    private UnitOfMeasure unitOfMeasure;
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.mpacala00.recipeswebservice.model.Ingredient;
+import com.github.mpacala00.recipeswebservice.model.UnitOfMeasure;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final IngredientService ingredientService;
+    private final UnitOfMeasureService unitOfMeasureService;
 
     @Override public void save(Recipe recipe) {
         List<Ingredient> ingredients = recipe.getIngredients();
@@ -24,6 +26,13 @@ public class RecipeServiceImpl implements RecipeService {
             Optional<Ingredient> ing = ingredientService.findByName(ingredient.getName());
             if (ing.isEmpty()) {
                 ingredientService.save(Ingredient.builder().name(ingredient.getName()).build());
+            }
+
+            if (ingredient.getUnitOfMeasure() != null){
+                Optional<UnitOfMeasure> uom =  unitOfMeasureService.findByUnit(ingredient.getUnitOfMeasure().getUnit());
+                if (uom.isEmpty()){
+                    unitOfMeasureService.save(UnitOfMeasure.builder().unit(ingredient.getUnitOfMeasure().getUnit()).build());
+                }
             }
         });
 
