@@ -14,4 +14,8 @@ export class RecipeService {
   getAllRecipes() {
     return this.http.get<Recipe[]>(this.recipesUrl);
   }
+
+  postRecipe(recipe: Recipe) {
+    return this.http.post<Recipe>(this.recipesUrl, recipe);
+  }
 }

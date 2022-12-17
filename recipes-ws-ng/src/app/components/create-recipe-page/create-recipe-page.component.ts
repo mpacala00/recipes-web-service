@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Recipe } from 'src/app/model/recipe';
 import { UnitOfMeasure } from 'src/app/model/unit-of-measure';
+import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-create-recipe-page',
@@ -15,10 +16,13 @@ export class CreateRecipePageComponent implements OnInit {
 
   recipe: Recipe;
 
+  //todo fetch all ingredients & uoms
   ingredients = [];
   unitOfMeasures = [];
 
-  constructor() { }
+  responseMessage: string;
+
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     this.newRecipeFormGroup = new FormGroup({
@@ -27,17 +31,20 @@ export class CreateRecipePageComponent implements OnInit {
       description: new FormControl('', Validators.required),
       instructions: new FormControl('', Validators.required)
     })
-
-    //todo fetch all ingredients & uoms
   }
 
   postRecipe() {
     this.recipe = this.newRecipeFormGroup.value;
     this.recipe.ingredients = this.recipeIngredientsFormArr.value;
-    // this.recipe.ingredients.forEach(ing => {
-    //   ing.unit = { id: '', unit: ing.unit };
-    // })
     console.log(this.recipe);
+
+    this.recipeService.postRecipe(this.recipe).subscribe({
+      next: (res) => this.responseMessage = "Recipe created",
+      error: (err) => {
+        this.responseMessage = "Error occured while creating recipe"
+        console.error('Recipe post error:', err)
+      }
+    })
   }
 
   addRecipeIngredient(index: number) {
@@ -46,12 +53,22 @@ export class CreateRecipePageComponent implements OnInit {
        new FormGroup({
           name: new FormControl('', Validators.required),
           quantity: new FormControl('', Validators.required),
-          unit: new FormControl('', Validators.required)
+          unitOfMeasure: new FormGroup({
+            unit: new FormControl('', Validators.required)
+          })
        }));
  }
 
- addIngredientDetails(event: any, index: number) {
-    this.recipeIngredientsFormArr.at(index).value.size = event.target.value;
+  addIngredientNameDetails(event: any, index: number) {
+    this.recipeIngredientsFormArr.at(index).value.name = event.target.value;
+  }
+
+  addIngredientQuantityDetails(event: any, index: number) {
+    this.recipeIngredientsFormArr.at(index).value.quantity = event.target.value;
+  }
+
+  addIngredientUnitOfMeasureDetails(event: any, index: number) {
+    this.recipeIngredientsFormArr.at(index).value.unitOfMeasure.unit = event.target.value;
   }
 
   printRecipeForm() {

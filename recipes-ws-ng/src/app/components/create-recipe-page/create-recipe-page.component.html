@@ -2,10 +2,11 @@
 
 
 <h2 class="card-title mt-2 ml-2 py-3">Add new recipe</h2>
+<p class="ml-2" *ngIf="responseMessage">{{responseMessage}}</p>
 <div class="row px-2">
     <div class="col-12">
         <form [formGroup]="newRecipeFormGroup">
-          <button class="button-btn" (click)="printRecipeForm()">Print recipe form</button>
+          <!-- <button class="button-btn" (click)="printRecipeForm()">Print recipe form</button> -->
             <div class="form-group">
               <label>Recipe name</label>
               <input type="text" formControlName="name" class="form-control" placeholder="Name">
@@ -33,24 +34,24 @@
                         <div class="col-4 p-0">
                             <label class="checkbox-inline" class="label-count">
                                Name:
-                               <input class="form-control count-input" type="text" [value]="'New size'"
-                                  (change)="addIngredientDetails($event, i)">
+                               <input class="form-control count-input" type="text" [value]="''"
+                                  (change)="addIngredientNameDetails($event, i)">
                             </label>
                          </div>
 
                          <div class="col-4 p-0">
                             <label class="checkbox-inline" class="label-count">
-                               Amount:
-                               <input class="form-control count-input" type="text" [value]="'New size'"
-                                  (change)="addIngredientDetails($event, i)">
+                               Quantity:
+                               <input class="form-control count-input" type="text" [value]="''"
+                                  (change)="addIngredientQuantityDetails($event, i)">
                             </label>
                          </div>
 
                          <div class="col-4 p-0">
                             <label class="checkbox-inline" class="label-count">
                                Unit of measure:
-                               <input class="form-control count-input" type="text" [value]="'New size'"
-                                  (change)="addIngredientDetails($event, i)">
+                               <input class="form-control count-input" type="text" [value]="''"
+                                  (change)="addIngredientUnitOfMeasureDetails($event, i)">
                             </label>
                          </div>
                     </div>
