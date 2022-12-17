@@ -1,19 +1,16 @@
 package com.github.mpacala00.recipeswebservice.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-@Document("ingredients")
+@Document("units-of-measure")
 @Data
 @Builder
-public class Ingredient {
+public class UnitOfMeasure {
 
     @Id
     private String id;
     private String name;
-    private Double quantity;
 }
