@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
