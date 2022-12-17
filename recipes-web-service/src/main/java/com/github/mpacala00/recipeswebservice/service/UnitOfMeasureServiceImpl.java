@@ -25,7 +25,7 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService{
     }
 
     @Override
-    public Optional<UnitOfMeasure> findByName(String name) {
-        return unitOfMeasureRepository.findByName(name);
+    public Optional<UnitOfMeasure> findByUnit(String unit) {
+        return unitOfMeasureRepository.findByUnit(unit);
     }
 }
