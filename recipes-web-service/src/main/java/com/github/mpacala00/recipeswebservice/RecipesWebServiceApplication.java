@@ -46,7 +46,10 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 				.category("Dinner")
 				.ingredients(Arrays.asList(
 						ing1, ing2, ing3
-				)).build()
+				))
+				.description("Easy and simple italian meat and pasta based dish")
+				.instructions("Step 1: cook your pasta")
+				.build()
 		);
 
 		unitOfMeasureService.save(UnitOfMeasure.builder().unit("g").build());
