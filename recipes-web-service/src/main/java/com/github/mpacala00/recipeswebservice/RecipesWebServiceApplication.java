@@ -6,7 +6,6 @@ import java.util.UUID;
 import com.github.mpacala00.recipeswebservice.model.Ingredient;
 import com.github.mpacala00.recipeswebservice.model.UnitOfMeasure;
 import com.github.mpacala00.recipeswebservice.service.IngredientService;
-import com.github.mpacala00.recipeswebservice.service.UnitOfMeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +19,8 @@ import com.github.mpacala00.recipeswebservice.service.RecipeService;
 public class RecipesWebServiceApplication implements CommandLineRunner {
 
 	@Autowired RecipeService recipeService;
-	@Autowired UnitOfMeasureService unitOfMeasureService;
+	@Autowired
+	IngredientService ingredientService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(RecipesWebServiceApplication.class, args);
