@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import com.github.mpacala00.recipeswebservice.model.Ingredient;
+import com.github.mpacala00.recipeswebservice.model.UnitOfMeasure;
 import com.github.mpacala00.recipeswebservice.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
