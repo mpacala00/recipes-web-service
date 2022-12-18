@@ -21,8 +21,6 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 
 	@Autowired
 	RecipeService recipeService;
-	@Autowired
-	NutritionApiService nutritionApiService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(RecipesWebServiceApplication.class, args);
@@ -36,14 +34,15 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 	 */
 	@Override public void run(String... args) throws Exception {
 		this.saveExampleRecipes();
-		this.testNutritionApi();
 	}
 
 	private void saveExampleRecipes() {
 		UnitOfMeasure uom1 = UnitOfMeasure.builder().unit("grams").build();
+		UnitOfMeasure uom2 = UnitOfMeasure.builder().unit("ml").build();
+
 		Ingredient ing1 = Ingredient.builder().name("Pasta").quantity(400.0).unitOfMeasure(uom1).build();
-		Ingredient ing2 = Ingredient.builder().name("Tomato sauce").quantity(500.0).build();
-		Ingredient ing3 = Ingredient.builder().name("Ground beef").quantity(500.0).build();
+		Ingredient ing2 = Ingredient.builder().name("Tomato sauce").quantity(500.0).unitOfMeasure(uom2).build();
+		Ingredient ing3 = Ingredient.builder().name("Ground beef").quantity(500.0).unitOfMeasure(uom1).build();
 
 		recipeService.save(Recipe.builder()
 				.name("Spaghetti Bolognese")
@@ -56,10 +55,5 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 				.build()
 		);
 
-	}
-
-	private void testNutritionApi() {
-		NutritionDetails nutritionDetails = nutritionApiService.fetchNutritionDetails();
-		System.out.println(nutritionDetails);
 	}
 }

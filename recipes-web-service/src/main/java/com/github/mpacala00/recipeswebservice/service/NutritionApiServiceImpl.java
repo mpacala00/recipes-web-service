@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mpacala00.recipeswebservice.http.NutritionDetailsReqBody;
+import com.github.mpacala00.recipeswebservice.model.Ingredient;
 import com.github.mpacala00.recipeswebservice.model.NutritionDetails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,17 +22,12 @@ public class NutritionApiServiceImpl implements NutritionApiService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public NutritionDetails fetchNutritionDetails() {
+    public NutritionDetails fetchNutritionDetails(List<Ingredient> ingredients) {
         String appId = "APP_ID";
         String appKey = "APP_KEY";
 
         String url = String.format(NUTRITION_API_BASE_URL + "?app_id=%s&app_key=%s", appId, appKey);
-
-        NutritionDetailsReqBody body = new NutritionDetailsReqBody();
-        body.setIngr(List.of(
-                "500 grams flour",
-                "200 ml tomato sauce")
-        );
+        NutritionDetailsReqBody body = buildNutritionDetailsReqBody(ingredients);
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -54,5 +51,22 @@ public class NutritionApiServiceImpl implements NutritionApiService {
             throw new RuntimeException("An error occured while processing nutrition details for recipe");
         }
 
+    }
+
+    private NutritionDetailsReqBody buildNutritionDetailsReqBody(List<Ingredient> ingredients) {
+        List<String> formattedIngredients = new ArrayList<>();
+
+        ingredients.forEach(ing -> {
+            StringBuilder formattedIngredientBuilder = new StringBuilder();
+            formattedIngredientBuilder.append(ing.getName());
+            formattedIngredientBuilder.append(" ");
+            formattedIngredientBuilder.append(ing.getQuantity());
+            formattedIngredientBuilder.append(" ");
+            formattedIngredientBuilder.append(ing.getUnitOfMeasure().getUnit());
+
+            formattedIngredients.add(formattedIngredientBuilder.toString());
+        });
+
+        return new NutritionDetailsReqBody(formattedIngredients);
     }
 }

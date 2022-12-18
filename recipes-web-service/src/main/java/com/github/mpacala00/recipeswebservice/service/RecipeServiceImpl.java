@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.mpacala00.recipeswebservice.model.Ingredient;
+import com.github.mpacala00.recipeswebservice.model.NutritionDetails;
 import com.github.mpacala00.recipeswebservice.model.UnitOfMeasure;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepository;
     private final IngredientService ingredientService;
     private final UnitOfMeasureService unitOfMeasureService;
+    private final NutritionDetailsService nutritionDetailsService;
 
     @Override public void save(Recipe recipe) {
         List<Ingredient> ingredients = recipe.getIngredients();
@@ -35,6 +37,9 @@ public class RecipeServiceImpl implements RecipeService {
                 }
             }
         });
+
+        NutritionDetails nutritionDetails = nutritionDetailsService.getDetailsFromApi(ingredients);
+        recipe.setNutritionDetails(nutritionDetails);
 
         recipeRepository.save(recipe);
     }
