@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import com.github.mpacala00.recipeswebservice.model.Ingredient;
+import com.github.mpacala00.recipeswebservice.model.NutritionDetails;
 import com.github.mpacala00.recipeswebservice.model.UnitOfMeasure;
-import com.github.mpacala00.recipeswebservice.service.IngredientService;
+import com.github.mpacala00.recipeswebservice.service.NutritionApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,9 +19,10 @@ import com.github.mpacala00.recipeswebservice.service.RecipeService;
 @SpringBootApplication
 public class RecipesWebServiceApplication implements CommandLineRunner {
 
-	@Autowired RecipeService recipeService;
 	@Autowired
-	IngredientService ingredientService;
+	RecipeService recipeService;
+	@Autowired
+	NutritionApiService nutritionApiService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(RecipesWebServiceApplication.class, args);
@@ -34,6 +36,7 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 	 */
 	@Override public void run(String... args) throws Exception {
 		this.saveExampleRecipes();
+		this.testNutritionApi();
 	}
 
 	private void saveExampleRecipes() {
@@ -53,5 +56,10 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 				.build()
 		);
 
+	}
+
+	private void testNutritionApi() {
+		NutritionDetails nutritionDetails = nutritionApiService.fetchNutritionDetails();
+		System.out.println(nutritionDetails);
 	}
 }
