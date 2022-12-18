@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mpacala00.recipeswebservice.http.NutritionDetailsReqBody;
 import com.github.mpacala00.recipeswebservice.model.Ingredient;
 import com.github.mpacala00.recipeswebservice.model.NutritionDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +23,13 @@ public class NutritionApiServiceImpl implements NutritionApiService {
     String NUTRITION_API_BASE_URL = "https://api.edamam.com/api/nutrition-details";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    @Autowired
+    Environment environment;
+
     @Override
     public NutritionDetails fetchNutritionDetails(List<Ingredient> ingredients) {
-        String appId = "APP_ID";
-        String appKey = "APP_KEY";
+        String appId = environment.getProperty("app_id");
+        String appKey = environment.getProperty("app_key");
 
         String url = String.format(NUTRITION_API_BASE_URL + "?app_id=%s&app_key=%s", appId, appKey);
         NutritionDetailsReqBody body = buildNutritionDetailsReqBody(ingredients);
