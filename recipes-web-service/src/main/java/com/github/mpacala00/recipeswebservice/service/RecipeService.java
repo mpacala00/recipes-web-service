@@ -8,7 +8,7 @@ import com.github.mpacala00.recipeswebservice.model.Recipe;
 
 public interface RecipeService {
 
-    void save(Recipe recipe);
+    void save(Recipe recipe, boolean fetchNutrition);
 
     List<Recipe> findAll();
 

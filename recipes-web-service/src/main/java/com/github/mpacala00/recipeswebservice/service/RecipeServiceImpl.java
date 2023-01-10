@@ -22,7 +22,7 @@ public class RecipeServiceImpl implements RecipeService {
     private final UnitOfMeasureService unitOfMeasureService;
     private final NutritionDetailsService nutritionDetailsService;
 
-    @Override public void save(Recipe recipe) {
+    @Override public void save(Recipe recipe, boolean fetchNutrition) {
         List<Ingredient> ingredients = recipe.getIngredients();
         ingredients.forEach(ingredient -> {
             Optional<Ingredient> ing = ingredientService.findByName(ingredient.getName());
@@ -38,8 +38,10 @@ public class RecipeServiceImpl implements RecipeService {
             }
         });
 
-        NutritionDetails nutritionDetails = nutritionDetailsService.getDetailsFromApi(ingredients);
-        recipe.setNutritionDetails(nutritionDetails);
+        if (fetchNutrition) {
+            NutritionDetails nutritionDetails = nutritionDetailsService.getDetailsFromApi(ingredients);
+            recipe.setNutritionDetails(nutritionDetails);
+        }
 
         recipeRepository.save(recipe);
     }

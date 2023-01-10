@@ -53,7 +53,7 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 				.description("Easy and simple italian meat and pasta based dish")
 				.instructions("Step 1: cook your pasta")
 				.build()
-		);
+		, false);
 
 	}
 }

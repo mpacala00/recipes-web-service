@@ -37,7 +37,7 @@ public class RecipeController {
     public ResponseEntity<List<Recipe>> saveRecipe(@RequestBody DtoCreateRecipe dtoCreateRecipe)
             throws URISyntaxException {
         Recipe recipe = new Recipe(dtoCreateRecipe);
-        recipeService.save(recipe);
+        recipeService.save(recipe, false);
 
         return ResponseEntity.created(URI.create("/recipes/" + recipe.getId())).build();
     }
