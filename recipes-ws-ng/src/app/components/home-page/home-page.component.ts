@@ -16,8 +16,8 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getAllRecipes().subscribe({
       next: (res) => {
-        this.recipes = res
-        console.log('recipes:', this.recipes);
+        console.log('recipes:', res);
+        this.recipes = res.slice(0, 3) //show only 3 on home page - add pagination
       },
       error: (err) => console.error('error while fetching recipes', err)
     }

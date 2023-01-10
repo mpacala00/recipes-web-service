@@ -1,1 +1,21 @@
-<p>browse-recipes-page works!</p>
+<div class="card my-3" *ngFor="let recipe of recipes">
+    <div class="card-header">
+      {{ recipe.name }}
+    </div>
+    <div class="card-body row">
+        <img class="col-3" src="./assets/img/makaron-spaghetti-bolognese-1.jpeg" alt="{{ recipe.name }}"/>
+
+        <div class="col-9">
+            <h6 class="card-title">{{ recipe.description }}</h6>
+            <p class="card-text">
+                Ingredients:<br>
+                <small *ngFor="let ing of recipe.ingredients | slice:0:3; let i = index">
+                    {{ing.name}},&nbsp;{{ing.quantity}}&nbsp;{{ing.unitOfMeasure.unit}}
+                    <span *ngIf="recipe.ingredients.length > 3 && i == 2">...</span>
+                    <br>
+                </small>
+            </p>
+            <a href="#" class="btn btn-primary">View recipe</a>
+        </div>
+    </div>
+</div>
