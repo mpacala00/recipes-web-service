@@ -1,12 +1,10 @@
 package com.github.mpacala00.recipeswebservice;
 
 import java.util.Arrays;
-import java.util.UUID;
 
 import com.github.mpacala00.recipeswebservice.model.Ingredient;
-import com.github.mpacala00.recipeswebservice.model.NutritionDetails;
 import com.github.mpacala00.recipeswebservice.model.UnitOfMeasure;
-import com.github.mpacala00.recipeswebservice.service.NutritionApiService;
+import com.github.mpacala00.recipeswebservice.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +19,9 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 
 	@Autowired
 	RecipeService recipeService;
+
+	@Autowired
+	RecipeRepository recipeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(RecipesWebServiceApplication.class, args);
@@ -37,6 +38,10 @@ public class RecipesWebServiceApplication implements CommandLineRunner {
 	}
 
 	private void saveExampleRecipes() {
+		if (recipeRepository.findByName("Spaghetti Bolognese").isPresent()) {
+			return;
+		}
+
 		UnitOfMeasure uom1 = UnitOfMeasure.builder().unit("grams").build();
 		UnitOfMeasure uom2 = UnitOfMeasure.builder().unit("ml").build();
 

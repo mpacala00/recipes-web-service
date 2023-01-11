@@ -23,6 +23,8 @@ public class RecipeServiceImpl implements RecipeService {
     private final NutritionDetailsService nutritionDetailsService;
 
     @Override public void save(Recipe recipe, boolean fetchNutrition) {
+        validateRecipe(recipe);
+
         List<Ingredient> ingredients = recipe.getIngredients();
         ingredients.forEach(ingredient -> {
             Optional<Ingredient> ing = ingredientService.findByName(ingredient.getName());
@@ -65,5 +67,11 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void deleteById(String id) {
         recipeRepository.deleteById(id);
+    }
+
+    private void validateRecipe(Recipe recipe) {
+        if (findByName(recipe.getName()).isPresent()) {
+            throw new RuntimeException(String.format("Recipe of name %s is present", recipe.getName()));
+        }
     }
 }
