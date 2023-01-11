@@ -14,6 +14,7 @@ export class CreateRecipePageComponent implements OnInit {
   public newRecipeFormGroup: FormGroup;
   public recipeIngredientsFormArr: FormArray = new FormArray([]);
 
+  imageFile: File;
   recipe: Recipe;
 
   //todo fetch all ingredients & uoms
@@ -38,13 +39,26 @@ export class CreateRecipePageComponent implements OnInit {
     this.recipe.ingredients = this.recipeIngredientsFormArr.value;
     console.log(this.recipe);
 
-    this.recipeService.postRecipe(this.recipe).subscribe({
-      next: (res) => this.responseMessage = "Recipe created",
+    let recipeLocation = this.recipeService.postRecipe(this.recipe).subscribe({
+      next: (res) => {
+        this.responseMessage = "Recipe created";
+        let recipeLocation = res.headers.get('Location');
+        
+        if (!recipeLocation) {
+          return;
+        }
+
+        let recipeId = recipeLocation.split('/')[2];
+        console.log('RECIPE ID');
+        this.uploadImage(recipeId);
+      },
       error: (err) => {
         this.responseMessage = "Error occured while creating recipe"
         console.error('Recipe post error:', err)
       }
     })
+
+    
   }
 
   addRecipeIngredient(index: number) {
@@ -76,4 +90,22 @@ export class CreateRecipePageComponent implements OnInit {
     console.log(this.recipeIngredientsFormArr.value);
   }
 
+  updateImage($event: any) {
+     $event.preventDefault();
+    this.imageFile = $event.target.files[0];
+     console.log('imageFile', this.imageFile);
+  }
+
+  uploadImage(recipeId: string) {
+    const imageFormData = new FormData();
+    imageFormData.append('imageFile', this.imageFile, this.imageFile.name);
+
+    this.recipeService.uploadRecipeImage(recipeId, imageFormData).subscribe({
+      next: (res) => console.log('image uploaded'),
+      error: (err) => {
+        this.responseMessage = "Error occured while posting image"
+        console.error('Recipe image upload error:', err)
+      }
+    })
+  }
 }

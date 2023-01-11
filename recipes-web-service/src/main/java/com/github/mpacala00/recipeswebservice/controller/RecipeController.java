@@ -1,21 +1,21 @@
 package com.github.mpacala00.recipeswebservice.controller;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import com.github.mpacala00.recipeswebservice.model.Image;
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.github.mpacala00.recipeswebservice.model.Recipe;
 import com.github.mpacala00.recipeswebservice.model.dto.DtoCreateRecipe;
 import com.github.mpacala00.recipeswebservice.service.RecipeService;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -40,6 +40,24 @@ public class RecipeController {
         recipeService.save(recipe, false);
 
         return ResponseEntity.created(URI.create("/recipes/" + recipe.getId())).build();
+    }
+
+    @PostMapping(value = "/recipes/{recipeId}/image")
+    public ResponseEntity<Void> attachImageToRecipe(@PathVariable("recipeId") String recipeId, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+
+        Optional<Recipe> recipeOpt = recipeService.findById(recipeId);
+        if (recipeOpt.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        Image image = new Image(imageFile.getName(), imageFile.getContentType(),
+                new Binary(BsonBinarySubType.BINARY, imageFile.getBytes()));
+
+        Recipe recipe = recipeOpt.get();
+        recipe.setImage(image);
+
+        recipeService.save(recipe, false);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/recipes/{id}")

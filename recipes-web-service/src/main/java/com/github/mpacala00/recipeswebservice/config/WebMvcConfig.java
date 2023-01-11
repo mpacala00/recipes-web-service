@@ -17,7 +17,8 @@ public class WebMvcConfig {
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("*")
                         .maxAge(3600L)
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .exposedHeaders("Location");
             }
         };
     }

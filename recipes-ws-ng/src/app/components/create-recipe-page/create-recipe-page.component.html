@@ -15,14 +15,22 @@
                 <label>Recipe description</label>
                 <input type="text" formControlName="description" class="form-control" placeholder="Description">
               </div>
+
               <div class="form-group">
                 <label>Recipe instructions</label>
                 <input type="text" formControlName="instructions" class="form-control" placeholder="Instructions">
               </div>
+
               <div class="form-group">
                 <label>Recipe category; todo- use enum on front to choose from select</label>
                 <input type="text" formControlName="category" class="form-control" placeholder="Category">
               </div>
+
+              <div class="form-group">
+                <label>Add image to recipe:</label><br>
+                <input type="file" accept="image/*" (change)="updateImage($event)">
+              </div>
+
               <div class="form-group">
                 <label>Add recipe ingredients:</label>
                 <div class="card">

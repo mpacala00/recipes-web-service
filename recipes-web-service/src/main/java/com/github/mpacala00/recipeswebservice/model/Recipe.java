@@ -27,6 +27,7 @@ public class Recipe {
     private String description;
     private String instructions;
     private NutritionDetails nutritionDetails;
+    private Image image;
 
     public Recipe() {
         this.id = UUID.randomUUID().toString();
