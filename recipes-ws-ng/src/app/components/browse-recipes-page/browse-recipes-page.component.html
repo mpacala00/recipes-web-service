@@ -3,7 +3,7 @@
       {{ recipe.name }}
     </div>
     <div class="card-body row">
-        <img class="col-3" src="./assets/img/makaron-spaghetti-bolognese-1.jpeg" alt="{{ recipe.name }}"/>
+        <img class="col-3" src="{{'data:' + recipe.image?.type +';base64,' + recipe.image?.data.data}}" alt="{{ recipe.image?.name }}"/>
 
         <div class="col-9">
             <h6 class="card-title">{{ recipe.description }}</h6>

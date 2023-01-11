@@ -1,7 +1,7 @@
 <div class="card">
   <img
     class="card-img-top"
-    src="./assets/img/makaron-spaghetti-bolognese-1.jpeg"
+    src="{{'data:' + recipe.image?.type +';base64,' + recipe.image?.data.data}}"
     alt="{{ recipe.name }}"
   />
   <div class="card-body">
