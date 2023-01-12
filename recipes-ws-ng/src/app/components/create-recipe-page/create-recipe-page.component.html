@@ -71,13 +71,13 @@
 
         <div class="col-12">
           <div
-            class="row"
+            class="row mt-3"
             *ngFor="
               let recipeIng of recipeIngredientsFormArr.controls;
               let i = index
             "
           >
-            <div class="col-4 p-0 mt-2">
+            <div class="col p-0">
               <label class="checkbox-inline" class="label-count">
                 Name:
                 <input
@@ -89,7 +89,7 @@
               </label>
             </div>
 
-            <div class="col-4 p-0">
+            <div class="col p-0">
               <label class="checkbox-inline" class="label-count">
                 Quantity:
                 <input
@@ -101,7 +101,7 @@
               </label>
             </div>
 
-            <div class="col-4 p-0">
+            <div class="col p-0">
               <label class="checkbox-inline" class="label-count">
                 Unit of measure:
                 <input
@@ -111,14 +111,15 @@
                   (change)="addIngredientUnitOfMeasureDetails($event, i)"
                 />
               </label>
-
-              <button
-                class="btn btn-light pb-2"
-                (click)="deleteIngredient($event, i)"
-              >
-                X
-              </button>
             </div>
+            <button
+              class="btn btn-light col-1"
+              (click)="deleteIngredient($event, i)"
+            >
+              <span class="material-symbols-outlined align-middle text-danger">
+                do_not_disturb_on
+              </span>
+            </button>
           </div>
         </div>
       </div>
