@@ -9,13 +9,31 @@
         aria-label="Search recipes"
       />
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">🔍</button>
+        <button
+          class="btn btn-outline-secondary material-symbols-outlined"
+          type="button"
+        >
+          search
+        </button>
       </div>
     </div>
   </li>
-  <a [routerLink]="'recipes'">
-    <li class="list-group-item">📖 Browse recipes</li>
+  <a href="/browse-recipes">
+    <li class="list-group-item">
+      <span class="material-symbols-outlined align-middle"> menu_book </span>
+      <span class="align-middle"> Browse recipes</span>
+    </li>
   </a>
-  <a routerLink="/create-recipe"><li class="list-group-item">➕ Add recipe</li></a>
-  <a href="#"><li class="list-group-item">🥕 Browse ingredients</li></a>
+  <a routerLink="/create-recipe">
+    <li class="list-group-item">
+      <span class="material-symbols-outlined align-middle"> add_circle </span>
+      <span class="align-middle"> Add recipe</span>
+    </li></a
+  >
+  <a href="#"
+    ><li class="list-group-item">
+      <span class="material-symbols-outlined align-middle"> set_meal </span>
+      <span class="align-middle"> Browse ingredients</span>
+    </li></a
+  >
 </ul>
