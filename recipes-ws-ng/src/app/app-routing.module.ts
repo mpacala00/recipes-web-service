@@ -16,7 +16,11 @@ const routes: Routes = [
   },
   {
     path: 'create-recipe',
-    component: CreateRecipePageComponent
+    component: CreateRecipePageComponent,
+  },
+  {
+    path: 'browse-ingredients',
+    component: CreateRecipePageComponent,
   },
   {
     path: '',

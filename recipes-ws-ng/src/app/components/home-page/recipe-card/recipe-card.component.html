@@ -1,21 +1,25 @@
-<div class="card">
-  <div *ngIf="recipe.image; then thenBlock else elseBlock"></div>
+<div class="card h-100">
+  <div *ngIf="recipe.image; then thenBlock; else elseBlock"></div>
   <ng-template #thenBlock>
     <img
       class="card-img-top"
-      src="{{'data:' + recipe.image?.type +';base64,' + recipe.image?.data.data}}"
-      alt="{{ recipe.name }}"/>
+      src="{{
+        'data:' + recipe.image?.type + ';base64,' + recipe.image?.data.data
+      }}"
+      alt="{{ recipe.name }}"
+    />
   </ng-template>
   <ng-template #elseBlock>
     <img
       class="card-img-top"
       src="https://via.placeholder.com/150"
-      alt="{{ recipe.name }}">
+      alt="{{ recipe.name }}"
+    />
   </ng-template>
-  
-  
+
   <div class="card-body">
-    <h3 class="card-title">{{ recipe.name }}</h3>
+    <h3 class="card-title h4">{{ recipe.name }}</h3>
     <p class="card-text">{{ recipe.description }}</p>
+    <p class="text-muted small">Category: {{ recipe.category }}</p>
   </div>
 </div>
