@@ -4,11 +4,15 @@ import { CreateRecipePageComponent } from './components/create-recipe-page/creat
 import { BrowseRecipesPageComponent } from './components/browse-recipes-page/browse-recipes-page.component';
 
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { RecipePageComponent } from './components/recipe-page/recipe-page.component';
 
 const routes: Routes = [
   {
-    path: 'browse-recipes',
-    component: BrowseRecipesPageComponent,
+    path: 'recipes',
+    component: BrowseRecipesPageComponent
+  },
+  {
+    path: 'recipe/:id', component: RecipePageComponent
   },
   {
     path: 'create-recipe',
@@ -18,7 +22,7 @@ const routes: Routes = [
     path: '',
     component: HomePageComponent,
     pathMatch: 'full',
-  },
+  }
 ];
 
 @NgModule({
