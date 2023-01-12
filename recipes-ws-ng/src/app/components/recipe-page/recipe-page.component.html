@@ -1,4 +1,6 @@
-<a [routerLink]="['/recipes']" class="btn btn-primary">Go back recipes</a>
+<a [routerLink]="['/recipes']" class="btn btn-primary my-5"
+  >Go back to recipes</a
+>
 <div class="row">
   <div class="col-4">
     <img
@@ -18,6 +20,7 @@
   <div class="col-8">
     <h1>{{ recipe.name }}</h1>
     <h3>{{ recipe.description }}</h3>
+    <p>Ingredients:</p>
   </div>
   <div class="col-10 mt-4">
     <p>{{ recipe.instructions }}</p>

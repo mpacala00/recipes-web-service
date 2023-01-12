@@ -16,11 +16,19 @@ export class RecipeService {
   }
 
   postRecipe(recipe: Recipe) {
-    return this.http.post<Recipe>(this.recipesUrl, recipe, {observe: "response"});
+    return this.http.post<Recipe>(this.recipesUrl, recipe, {
+      observe: 'response',
+    });
   }
 
   uploadRecipeImage(recipeId: string, imageFormData: FormData) {
-    console.log('image url', `${this.recipesUrl}/${recipeId}/image`)
-    return this.http.post<FormData>(`${this.recipesUrl}/${recipeId}/image`, imageFormData);
+    return this.http.post<FormData>(
+      `${this.recipesUrl}/${recipeId}/image`,
+      imageFormData
+    );
+  }
+
+  getRecipeById(recipeId: string) {
+    return this.http.get<Recipe>(`${this.recipesUrl}/${recipeId}`);
   }
 }
