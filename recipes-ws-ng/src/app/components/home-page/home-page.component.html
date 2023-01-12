@@ -1,8 +1,6 @@
-<h2 class="card-title mt-2 ml-2 py-3">Recently added</h2>
+<p class="py-3 display-4 m-2">Recently added</p>
 <div class="row px-2">
-  <div class="col-4" *ngFor="let recipe of recipes">
-      <app-recipe-card [recipe]=recipe></app-recipe-card>
-    </div>
+  <div class="col-sm-3" *ngFor="let recipe of recipes">
+    <app-recipe-card [recipe]="recipe"></app-recipe-card>
+  </div>
 </div>
-
-<h3 class="card-title mt-2 ml-2 py-3">Another part of this section</h3>
