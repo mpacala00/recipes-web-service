@@ -3,13 +3,10 @@ package com.github.mpacala00.recipeswebservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.mpacala00.recipeswebservice.model.Ingredient;
-import com.github.mpacala00.recipeswebservice.model.NutritionDetails;
-import com.github.mpacala00.recipeswebservice.model.UnitOfMeasure;
+import com.github.mpacala00.recipeswebservice.model.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.github.mpacala00.recipeswebservice.model.Recipe;
 import com.github.mpacala00.recipeswebservice.repository.RecipeRepository;
 
 
@@ -48,6 +45,21 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.save(recipe);
     }
 
+    @Override
+    public void update(Recipe recipe) {
+        validateRecipeExists(recipe);
+
+        recipeRepository.save(recipe);
+    }
+
+    @Override
+    public void attachImage(Recipe recipe, Image image) {
+        validateRecipeExists(recipe);
+        recipe.setImage(image);
+
+        recipeRepository.save(recipe);
+    }
+
     @Override public List<Recipe> findAll() {
         return recipeRepository.findAll();
     }
@@ -74,4 +86,11 @@ public class RecipeServiceImpl implements RecipeService {
             throw new RuntimeException(String.format("Recipe of name %s is present", recipe.getName()));
         }
     }
+
+    private void validateRecipeExists(Recipe recipe) {
+        if (recipe.getId() == null || recipeRepository.findById(recipe.getId()).isEmpty()) {
+            throw new RuntimeException(String.format("Recipe of id=%s not found", recipe.getId()));
+        }
+    }
+
 }

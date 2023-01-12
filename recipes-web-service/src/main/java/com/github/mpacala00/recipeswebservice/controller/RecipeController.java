@@ -50,13 +50,7 @@ public class RecipeController {
             return ResponseEntity.noContent().build();
         }
 
-        Image image = new Image(imageFile.getName(), imageFile.getContentType(),
-                new Binary(BsonBinarySubType.BINARY, imageFile.getBytes()));
-
-        Recipe recipe = recipeOpt.get();
-        recipe.setImage(image);
-
-        recipeService.save(recipe, false);
+        recipeService.attachImage(recipeOpt.get(), Image.createImage(imageFile));
         return ResponseEntity.ok().build();
     }
 
