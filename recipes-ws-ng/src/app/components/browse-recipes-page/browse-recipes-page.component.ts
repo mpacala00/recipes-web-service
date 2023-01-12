@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Recipe } from 'src/app/model/recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
 
@@ -8,7 +9,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
   styleUrls: ['./browse-recipes-page.component.scss'],
 })
 export class BrowseRecipesPageComponent implements OnInit {
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private router: Router) {}
 
   recipes: Recipe[] = [];
 
@@ -17,8 +18,13 @@ export class BrowseRecipesPageComponent implements OnInit {
       next: (res) => {
         this.recipes = res;
       },
-      error: (err) => console.error('error while fetching recipes', err)
-    }
-    );
+      error: (err) => console.error('error while fetching recipes', err),
+    });
+  }
+
+  viewRecipe(recipe: Recipe) {
+    this.router.navigate(['/recipe', recipe.id], {
+      state: { recipe },
+    });
   }
 }

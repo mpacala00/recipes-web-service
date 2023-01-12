@@ -37,9 +37,7 @@
           <br />
         </small>
       </p>
-      <a [routerLink]="['/recipe', recipe.id]" class="btn btn-primary"
-        >View recipe</a
-      >
+      <a (click)="viewRecipe(recipe)" class="btn btn-primary">View recipe</a>
     </div>
   </div>
 </div>

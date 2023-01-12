@@ -1,1 +1,25 @@
 <a [routerLink]="['/recipes']" class="btn btn-primary">Go back recipes</a>
+<div class="row">
+  <div class="col-4">
+    <img
+      *ngIf="recipe.image"
+      class="img-thumbnail"
+      src="{{
+        'data:' + recipe.image?.type + ';base64,' + recipe.image?.data.data
+      }}"
+    />
+
+    <img
+      *ngIf="!recipe.image"
+      class="img-thumbnail"
+      src="https://via.placeholder.com/320"
+    />
+  </div>
+  <div class="col-8">
+    <h1>{{ recipe.name }}</h1>
+    <h3>{{ recipe.description }}</h3>
+  </div>
+  <div class="col-10 mt-4">
+    <p>{{ recipe.instructions }}</p>
+  </div>
+</div>

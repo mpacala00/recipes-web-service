@@ -9,10 +9,11 @@ import { RecipePageComponent } from './components/recipe-page/recipe-page.compon
 const routes: Routes = [
   {
     path: 'recipes',
-    component: BrowseRecipesPageComponent
+    component: BrowseRecipesPageComponent,
   },
   {
-    path: 'recipe/:id', component: RecipePageComponent
+    path: 'recipe/:id',
+    component: RecipePageComponent,
   },
   {
     path: 'create-recipe',
@@ -26,7 +27,7 @@ const routes: Routes = [
     path: '',
     component: HomePageComponent,
     pathMatch: 'full',
-  }
+  },
 ];
 
 @NgModule({
