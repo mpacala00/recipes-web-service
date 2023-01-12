@@ -10,6 +10,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { RecipeCardComponent } from './components/home-page/recipe-card/recipe-card.component';
 import { CreateRecipePageComponent } from './components/create-recipe-page/create-recipe-page.component';
 import { BrowseRecipesPageComponent } from './components/browse-recipes-page/browse-recipes-page.component';
+import { RecipePageComponent } from './components/recipe-page/recipe-page.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BrowseRecipesPageComponent } from './components/browse-recipes-page/bro
     RecipeCardComponent,
     CreateRecipePageComponent,
     BrowseRecipesPageComponent,
+    RecipePageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
