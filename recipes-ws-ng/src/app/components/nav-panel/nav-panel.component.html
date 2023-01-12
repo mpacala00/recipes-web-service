@@ -1,4 +1,6 @@
-<h1 class="card-title mt-2 ml-2 py-3">My recipes</h1>
+<a href="/" class="text-decoration-none text-reset">
+  <p class="card-title mt-2 ml-2 py-3 h1">My recipes</p>
+</a>
 <ul class="list-group list-group-flush">
   <li class="list-group-item">
     <div class="input-group mb-3">
@@ -13,9 +15,13 @@
       </div>
     </div>
   </li>
-  <a href="/browse-recipes">
+  <a href="/browse-recipes" class="text-decoration-none">
     <li class="list-group-item">📖 Browse recipes</li>
   </a>
-  <a routerLink="/create-recipe"><li class="list-group-item">➕ Add recipe</li></a>
-  <a href="#"><li class="list-group-item">🥕 Browse ingredients</li></a>
+  <a routerLink="/create-recipe" class="text-decoration-none"
+    ><li class="list-group-item">➕ Add recipe</li></a
+  >
+  <a href="/browse-ingredients" class="text-decoration-none"
+    ><li class="list-group-item">🥕 Browse ingredients</li></a
+  >
 </ul>

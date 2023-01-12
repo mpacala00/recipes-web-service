@@ -1,75 +1,134 @@
+<p class="card-title display-4 m-2 py-3 mb-0">Add new recipe</p>
+<p class="ml-2 alert alert alert-{{ alertType }}" *ngIf="responseMessage">
+  {{ responseMessage }}
+</p>
+<div class="row px-2 mb-3">
+  <div class="col-12">
+    <form [formGroup]="newRecipeFormGroup">
+      <!-- <button class="button-btn" (click)="printRecipeForm()">Print recipe form</button> -->
+      <div class="form-group">
+        <label>Recipe name</label>
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          placeholder="Name"
+        />
+      </div>
+      <div class="form-group">
+        <label>Recipe description</label>
+        <input
+          type="text"
+          formControlName="description"
+          class="form-control"
+          placeholder="Description"
+        />
+      </div>
 
+      <div class="form-group">
+        <label>Recipe instructions</label>
+        <input
+          type="text"
+          formControlName="instructions"
+          class="form-control"
+          placeholder="Instructions"
+        />
+      </div>
 
+      <div class="form-group">
+        <label>Recipe category</label>
+        <select formControlName="category" class="form-control">
+          <option value="" disabled selected>Select recipe category</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Supper">Supper</option>
+          <option value="Snacks">Snacks</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Vegan">Vegan</option>
+        </select>
+      </div>
 
-<h2 class="card-title mt-2 ml-2 py-3">Add new recipe</h2>
-<p class="ml-2" *ngIf="responseMessage">{{responseMessage}}</p>
-<div class="row px-2">
-    <div class="col-12">
-        <form [formGroup]="newRecipeFormGroup">
-          <!-- <button class="button-btn" (click)="printRecipeForm()">Print recipe form</button> -->
-            <div class="form-group">
-              <label>Recipe name</label>
-              <input type="text" formControlName="name" class="form-control" placeholder="Name">
+      <div class="form-group">
+        <label>Add image to recipe:</label><br />
+        <input
+          type="file"
+          accept="image/*"
+          (change)="updateImage($event)"
+          class="m-2"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Ingredients</label>
+        <div class="card mb-2">
+          <button
+            class="btn btn-light pb-2"
+            (click)="addRecipeIngredient(recipeIngredientsFormArr.length)"
+          >
+            Add new ingredient
+          </button>
+        </div>
+
+        <div class="col-12">
+          <div
+            class="row"
+            *ngFor="
+              let recipeIng of recipeIngredientsFormArr.controls;
+              let i = index
+            "
+          >
+            <div class="col-4 p-0 mt-2">
+              <label class="checkbox-inline" class="label-count">
+                Name:
+                <input
+                  class="form-control count-input"
+                  type="text"
+                  [value]="''"
+                  (change)="addIngredientNameDetails($event, i)"
+                />
+              </label>
             </div>
-            <div class="form-group">
-                <label>Recipe description</label>
-                <input type="text" formControlName="description" class="form-control" placeholder="Description">
-              </div>
 
-              <div class="form-group">
-                <label>Recipe instructions</label>
-                <input type="text" formControlName="instructions" class="form-control" placeholder="Instructions">
-              </div>
+            <div class="col-4 p-0">
+              <label class="checkbox-inline" class="label-count">
+                Quantity:
+                <input
+                  class="form-control count-input"
+                  type="text"
+                  [value]="''"
+                  (change)="addIngredientQuantityDetails($event, i)"
+                />
+              </label>
+            </div>
 
-              <div class="form-group">
-                <label>Recipe category; todo- use enum on front to choose from select</label>
-                <input type="text" formControlName="category" class="form-control" placeholder="Category">
-              </div>
+            <div class="col-4 p-0">
+              <label class="checkbox-inline" class="label-count">
+                Unit of measure:
+                <input
+                  class="form-control count-input"
+                  type="text"
+                  [value]="''"
+                  (change)="addIngredientUnitOfMeasureDetails($event, i)"
+                />
+              </label>
 
-              <div class="form-group">
-                <label>Add image to recipe:</label><br>
-                <input type="file" accept="image/*" (change)="updateImage($event)">
-              </div>
+              <button
+                class="btn btn-light pb-2"
+                (click)="deleteIngredient($event, i)"
+              >
+                X
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-              <div class="form-group">
-                <label>Add recipe ingredients:</label>
-                <div class="card">
-                    <button class="btn" (click)="addRecipeIngredient(recipeIngredientsFormArr.length)">Add new ingredient</button>
-                </div>
-
-                <div class="col-12">
-                    <div class="row" *ngFor="let recipeIng of recipeIngredientsFormArr.controls; let i = index">
-                        <div class="col-4 p-0">
-                            <label class="checkbox-inline" class="label-count">
-                               Name:
-                               <input class="form-control count-input" type="text" [value]="''"
-                                  (change)="addIngredientNameDetails($event, i)">
-                            </label>
-                         </div>
-
-                         <div class="col-4 p-0">
-                            <label class="checkbox-inline" class="label-count">
-                               Quantity:
-                               <input class="form-control count-input" type="text" [value]="''"
-                                  (change)="addIngredientQuantityDetails($event, i)">
-                            </label>
-                         </div>
-
-                         <div class="col-4 p-0">
-                            <label class="checkbox-inline" class="label-count">
-                               Unit of measure:
-                               <input class="form-control count-input" type="text" [value]="''"
-                                  (change)="addIngredientUnitOfMeasureDetails($event, i)">
-                            </label>
-                         </div>
-                    </div>
-                </div>
-                
-              </div>
-            
-
-            <button (click)="postRecipe()" class="btn btn-primary">Submit</button>
-          </form>
-    </div>
-    
+      <button
+        (click)="postRecipe()"
+        class="btn btn-primary w-50 mb-2 mx-auto d-block"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
 </div>

@@ -5,11 +5,10 @@ import { RecipeService } from 'src/app/services/recipe.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService) {}
 
   recipes: Recipe[] = [];
 
@@ -17,11 +16,9 @@ export class HomePageComponent implements OnInit {
     this.recipeService.getAllRecipes().subscribe({
       next: (res) => {
         console.log('recipes:', res);
-        this.recipes = res.slice(0, 3) //show only 3 on home page - add pagination
+        this.recipes = res.slice(0, 4);
       },
-      error: (err) => console.error('error while fetching recipes', err)
-    }
-    );
+      error: (err) => console.error('error while fetching recipes', err),
+    });
   }
-
 }
