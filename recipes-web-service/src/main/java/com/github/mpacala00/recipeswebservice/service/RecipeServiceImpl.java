@@ -1,10 +1,16 @@
 package com.github.mpacala00.recipeswebservice.service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.github.mpacala00.recipeswebservice.model.*;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.github.mpacala00.recipeswebservice.repository.RecipeRepository;
@@ -60,8 +66,22 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.save(recipe);
     }
 
-    @Override public List<Recipe> findAll() {
+    @Override public List<Recipe> findAll(Sort sort) {
+        if (sort != null) {
+            return recipeRepository.findAll(sort);
+        }
         return recipeRepository.findAll();
+    }
+
+    @Override
+    public Page<Recipe> findPage(Pageable paging) {
+        return recipeRepository.findAll(paging);
+    }
+
+    @Override
+    public Page<Recipe> findPageSortedByDate(Pageable paging) {
+        Page<Recipe> page = findPage(paging);
+        return sortByCreatedDate(page);
     }
 
     @Override public List<Recipe> findByCategory(String category) {
@@ -91,6 +111,11 @@ public class RecipeServiceImpl implements RecipeService {
         if (recipe.getId() == null || recipeRepository.findById(recipe.getId()).isEmpty()) {
             throw new RuntimeException(String.format("Recipe of id=%s not found", recipe.getId()));
         }
+    }
+
+    private Page<Recipe> sortByCreatedDate(Page<Recipe> page) {
+        List<Recipe> sortedRecipes = page.stream().sorted(Comparator.comparing(Recipe::getCreateTime)).collect(Collectors.toList());
+        return new PageImpl<>(sortedRecipes);
     }
 
 }

@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.mpacala00.recipeswebservice.model.Image;
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,19 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes")
-    public ResponseEntity<List<Recipe>> findAllRecipes() {
-        List<Recipe> recipes = recipeService.findAll();
+    public ResponseEntity<List<Recipe>> findAllRecipes(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+        Pageable paging = PageRequest.of(page, size);
+        List<Recipe> recipes = recipeService.findAll(null);
         return ResponseEntity.ok(recipes);
+    }
+
+    @GetMapping("/recipes/latest")
+    public ResponseEntity<Page<Recipe>> findAllLatestRecipes(@RequestParam(defaultValue = "0") int page,
+                                                       @RequestParam(defaultValue = "4") int size) {
+        Pageable paging = PageRequest.of(page, size);
+        Page<Recipe> recipePage = recipeService.findPageSortedByDate(paging);
+        return ResponseEntity.ok(recipePage);
     }
 
     @PostMapping("/recipes")

@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import com.github.mpacala00.recipeswebservice.model.Image;
 import com.github.mpacala00.recipeswebservice.model.Recipe;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 
 public interface RecipeService {
@@ -15,7 +18,11 @@ public interface RecipeService {
 
     void attachImage(Recipe recipe, Image image);
 
-    List<Recipe> findAll();
+    List<Recipe> findAll(Sort sort);
+
+    Page<Recipe> findPage(Pageable paging);
+
+    Page<Recipe> findPageSortedByDate(Pageable paging);
 
     List<Recipe> findByCategory(String category);
 
