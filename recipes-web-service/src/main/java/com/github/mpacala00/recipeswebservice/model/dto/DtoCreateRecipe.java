@@ -13,4 +13,6 @@ public class DtoCreateRecipe {
     private String name;
     private String category;
     private List<Ingredient> ingredients;
+    private String description;
+    private String instructions;
 }

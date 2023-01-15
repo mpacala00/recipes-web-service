@@ -114,7 +114,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     private Page<Recipe> sortByCreatedDate(Page<Recipe> page) {
-        List<Recipe> sortedRecipes = page.stream().sorted(Comparator.comparing(Recipe::getCreateTime)).collect(Collectors.toList());
+        List<Recipe> sortedRecipes = page.stream().sorted(Comparator.comparing(Recipe::getCreateTime).reversed()).collect(Collectors.toList());
         return new PageImpl<>(sortedRecipes);
     }
 

@@ -45,10 +45,11 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes")
-    public ResponseEntity<List<Recipe>> saveRecipe(@RequestBody DtoCreateRecipe dtoCreateRecipe)
+    public ResponseEntity<List<Recipe>> saveRecipe(@RequestBody DtoCreateRecipe dtoCreateRecipe,
+            @RequestParam(value = "fetchNutrition", required = false, defaultValue = "false") boolean fetchNutrition)
             throws URISyntaxException {
         Recipe recipe = new Recipe(dtoCreateRecipe);
-        recipeService.save(recipe, false);
+        recipeService.save(recipe, fetchNutrition);
 
         return ResponseEntity.created(URI.create("/recipes/" + recipe.getId())).build();
     }

@@ -41,5 +41,7 @@ public class Recipe {
         this.name = dtoCreateRecipe.getName();
         this.category = dtoCreateRecipe.getCategory();
         this.ingredients = dtoCreateRecipe.getIngredients();
+        this.description = dtoCreateRecipe.getDescription();
+        this.instructions = dtoCreateRecipe.getInstructions();
     }
 }
