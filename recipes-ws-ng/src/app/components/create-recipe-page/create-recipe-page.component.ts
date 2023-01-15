@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Recipe } from 'src/app/model/recipe';
 import { UnitOfMeasure } from 'src/app/model/unit-of-measure';
@@ -20,6 +20,11 @@ export class CreateRecipePageComponent implements OnInit {
   //todo fetch all ingredients & uoms
   ingredients = [];
   unitOfMeasures = [];
+  fetchNutrition: boolean = false;
+
+  setFetchNutrition($event: any) {
+    this.fetchNutrition = $event.srcElement.checked;
+  }
 
   responseMessage: string;
 
@@ -42,26 +47,28 @@ export class CreateRecipePageComponent implements OnInit {
     this.recipe.ingredients = this.recipeIngredientsFormArr.value;
     console.log(this.recipe);
 
-    let recipeLocation = this.recipeService.postRecipe(this.recipe).subscribe({
-      next: (res) => {
-        this.alertType = 'success';
-        this.responseMessage = 'Recipe created';
-        let recipeLocation = res.headers.get('Location');
+    let recipeLocation = this.recipeService
+      .postRecipe(this.recipe, this.fetchNutrition)
+      .subscribe({
+        next: (res) => {
+          this.alertType = 'success';
+          this.responseMessage = 'Recipe created';
+          let recipeLocation = res.headers.get('Location');
 
-        if (!recipeLocation) {
-          return;
-        }
+          if (!recipeLocation) {
+            return;
+          }
 
-        let recipeId = recipeLocation.split('/')[2];
-        console.log('RECIPE ID');
-        this.uploadImage(recipeId);
-      },
-      error: (err) => {
-        this.alertType = 'danger';
-        this.responseMessage = 'Error occured while creating recipe';
-        console.error('Recipe post error:', err);
-      },
-    });
+          let recipeId = recipeLocation.split('/')[2];
+          console.log('RECIPE ID');
+          this.uploadImage(recipeId);
+        },
+        error: (err) => {
+          this.alertType = 'danger';
+          this.responseMessage = 'Error occured while creating recipe';
+          console.error('Recipe post error:', err);
+        },
+      });
   }
 
   addRecipeIngredient(index: number) {

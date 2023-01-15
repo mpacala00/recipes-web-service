@@ -20,10 +20,14 @@ export class RecipeService {
     return this.http.get<RecipePage>(`${this.recipesUrl}/latest`);
   }
 
-  postRecipe(recipe: Recipe) {
-    return this.http.post<Recipe>(this.recipesUrl, recipe, {
-      observe: 'response',
-    });
+  postRecipe(recipe: Recipe, fetchNutrition: boolean) {
+    return this.http.post<Recipe>(
+      `${this.recipesUrl}?fetchNutrition=${fetchNutrition}`,
+      recipe,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   uploadRecipeImage(recipeId: string, imageFormData: FormData) {

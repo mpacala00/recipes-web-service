@@ -21,9 +21,40 @@
     />
   </div>
   <div class="col-8">
-    <h1>{{ recipe.name }}</h1>
-    <h3>{{ recipe.description }}</h3>
-    <p>Ingredients:</p>
+    <h2>{{ recipe.name }}</h2>
+    <h6>{{ recipe.description }}</h6>
+    <div class="row">
+      <div class="col-6">
+        <p>Ingredients:</p>
+        <p *ngFor="let ing of recipe.ingredients; let i = index">
+          {{ ing.name }},&nbsp;{{ ing.quantity }}&nbsp;{{
+            ing.unitOfMeasure.unit
+          }}
+        </p>
+      </div>
+
+      <div class="col-6">
+        <p>Nutrition:</p>
+        <p>calories: {{ recipe.nutritionDetails.calories }}&nbsp;kcal</p>
+        <p>
+          carbohydrates:
+          {{
+            recipe.nutritionDetails.carbohydrates | number : "1.2-2"
+          }}&nbsp;grams
+        </p>
+        <p>
+          fat: {{ recipe.nutritionDetails.fat | number : "1.2-2" }}&nbsp;grams
+        </p>
+        <p>
+          protein:
+          {{ recipe.nutritionDetails.protein | number : "1.2-2" }}&nbsp;grams
+        </p>
+        <p>
+          sugar:
+          {{ recipe.nutritionDetails.sugar | number : "1.2-2" }}&nbsp;grams
+        </p>
+      </div>
+    </div>
   </div>
   <div class="col-10 mt-4">
     <p>{{ recipe.instructions }}</p>
