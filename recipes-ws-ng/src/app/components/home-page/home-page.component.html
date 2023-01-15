@@ -1,6 +1,9 @@
 <p class="py-3 display-4 m-2">Recently added</p>
 <div class="row px-2">
   <div class="col-sm-3" *ngFor="let recipe of recipes">
-    <app-recipe-card [recipe]="recipe"></app-recipe-card>
+    <app-recipe-card
+      [recipe]="recipe"
+      (click)="navigateToRecipe(recipe.id)"
+    ></app-recipe-card>
   </div>
 </div>

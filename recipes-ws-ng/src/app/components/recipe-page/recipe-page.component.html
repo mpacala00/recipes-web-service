@@ -1,6 +1,9 @@
-<a [routerLink]="['/recipes']" class="btn btn-primary my-5"
-  >Go back to recipes</a
->
+<button [routerLink]="['/recipes']" class="btn btn-primary my-5">
+  Go back to recipes
+</button>
+<button class="btn btn-danger ml-3" (click)="deleteRecipe(recipe.id)">
+  Delete recipe
+</button>
 <div class="row">
   <div class="col-4">
     <img

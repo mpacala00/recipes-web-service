@@ -27,4 +27,13 @@ export class RecipePageComponent implements OnInit {
       error: (err) => console.error('error while fetching recipe', err),
     });
   }
+
+  deleteRecipe(recipeId: string) {
+    this.recipeService.deleteRecipeById(recipeId).subscribe({
+      next: (res) => {
+        this.router.navigate(['/recipes']);
+      },
+      error: (err) => console.error('error while deleting recipe', err),
+    });
+  }
 }
